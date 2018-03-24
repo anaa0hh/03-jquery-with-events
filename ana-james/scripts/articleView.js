@@ -98,7 +98,6 @@ articleView.handleMainNav = function() {
     evt.preventDefault();
     $('.tab-content').hide();
     $(`#${$(this).data('content')}`).fadeIn();
-    console.log(this);
   })
 
   // REVIEWED: Now trigger a click on the first .tab element, to set up the page.
@@ -108,18 +107,19 @@ articleView.handleMainNav = function() {
 
 articleView.setTeasers = function() {
   // REVIEWED: Hide elements beyond the first 2 in any article body.
-  // $('.article-body *:nth-of-type(n+2)').hide();
+  $('.article-body *:nth-of-type(n+2)').hide();
 
   // TODO: Add an event handler to reveal all the hidden elements, when the .read-on link is clicked. You can go ahead and hide the "Read On" link once it has been clicked. Be sure to prevent the default link-click action!
+
   // Ideally, we'd attach this as just one event handler on the #articles section, and let it process (in other words... delegate) any .read-on clicks that happen within child nodes.
 };
 
-// $('#articles').on('click', '.read-on', function (evt) {
-//   evt.preventDefault();
-//   $(this).parent().find('.article-body *').fadeIn();
-//   $(this).hide();
+$('#articles').on('click', '.read-on', function (evt) {
+  evt.preventDefault();
+  $(this).parent().find('.article-body *').fadeIn();
+  $(this).hide();
 
-// });
+});
 
 
 
@@ -130,5 +130,5 @@ $(document).ready(function() {
   articleView.handleAuthorFilter();
   articleView.handleCategoryFilter();
   articleView.handleMainNav();
-  // articleView.setTeasers();
+  articleView.setTeasers();
 })
